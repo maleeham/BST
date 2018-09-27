@@ -1,17 +1,16 @@
-/** @author 
- *  Binary search tree (starter code)
+/** @author Bhavya Kashetty, bxb180012
+ * 			Maleeha Shabeer Koul, msk180001
+ *  Binary search tree implementation
+ *  Date created: 09/27/2018
  **/
 
-package bxk180012;
+package msk180001;
 
-import java.util.Arrays;
 import java.util.Comparator;
-import java.util.Iterator;
 import java.util.Scanner;
 import java.util.Stack;
 
-
-public class BinarySearchTree<T extends Comparable<? super T>> implements Iterable<T> {
+public class BinarySearchTree<T extends Comparable<? super T>> {
     static class Entry<T> {
         T element;
         Entry<T> left, right;
@@ -24,13 +23,18 @@ public class BinarySearchTree<T extends Comparable<? super T>> implements Iterab
     
     Entry<T> root;
     int size;
-
+    
+    /**
+     * Constructor
+     */
     public BinarySearchTree() {
 	root = null;
 	size = 0;
     }
 
-    /** TO DO: Is x contained in tree?
+    /** To check if x is contained in tree
+     * @return boolean if element found or not
+     * @param Element x of Entry<T> to be found 
      */
     public boolean contains(T x) {
     	Entry<T> t = find(x);
@@ -41,8 +45,9 @@ public class BinarySearchTree<T extends Comparable<? super T>> implements Iterab
     	}
     }
 
-    /** TO DO: Is there an element that is equal to x in the tree?
-     *  Element in tree that is equal to x is returned, null otherwise.
+    /** If there is an element that is equal to x in the tree.
+     *  @return Element in tree that is equal to x, null otherwise.
+     *  @param Element to be found
      */
     public T get(T x) {
     	Entry<T> t = find(x);
@@ -54,9 +59,10 @@ public class BinarySearchTree<T extends Comparable<? super T>> implements Iterab
     	}
     }
 
-    /** TO DO: Add x to tree. 
-     *  If tree contains a node with same key, replace element by x.
-     *  Returns true if x is a new element added to tree.
+    /** Adds x to tree. 
+     *  If tree contains a node with same key, replaces element by x.
+     *  @return true if x is a new element added to tree.
+     *  @param element to be added
      */
     public boolean add(T x) {
     	if (size == 0) {
@@ -78,8 +84,9 @@ public class BinarySearchTree<T extends Comparable<? super T>> implements Iterab
 	return true;
     }
 
-    /** TO DO: Remove x from tree. 
-     *  Return x if found, otherwise return null
+    /** Removes x from tree. 
+     *  @return x if found, else null
+     *  @param the element x to be deleted
      */
     public T remove(T x) {
     	T result;
@@ -101,6 +108,11 @@ public class BinarySearchTree<T extends Comparable<? super T>> implements Iterab
     size--;
 	return result;
     }
+    
+    /** Helper method:
+     * Pre-condition : 't' has atmost one child
+     * @param t
+     */
     void byPass(Entry<T> t) {
     	Entry<T> parent = s.isEmpty()?null:s.peek();
     	Entry<T> child = t.left == null? t.right : t.left;
@@ -114,7 +126,10 @@ public class BinarySearchTree<T extends Comparable<? super T>> implements Iterab
     	}
     }
     
-
+    /**
+     * Get the minimum element of the tree
+     * @return t minimum
+     */
     public T min() {
     	if(size == 0) {
     		return null;
@@ -126,6 +141,10 @@ public class BinarySearchTree<T extends Comparable<? super T>> implements Iterab
 	  return t.element;
     }
 
+    /**
+     * Get the maximum element of the tree
+     * @return t maximum
+     */
     public T max() {
     	if(size == 0) {
     		return null;
@@ -136,7 +155,16 @@ public class BinarySearchTree<T extends Comparable<? super T>> implements Iterab
     	}   	
 	  return t.element;
     }
+    
+    //Stack declared as class variable 
     Stack<Entry<T>> s = new Stack<Entry<T>>();
+    
+    /** Helper method:
+     * Finds the entry containing x
+     * @param t
+     * @param x
+     * @return entry containing x
+     */
     Entry<T> find(Entry<T> t, T x){
     	if (t==null || t.element == x) {
     		return t;
@@ -166,11 +194,15 @@ public class BinarySearchTree<T extends Comparable<? super T>> implements Iterab
     	}
     	return t;
     }
+    
     Entry<T> find(T x){
     	return find(root, x);
     }
 
-    // TODO: Create an array with the elements using in-order traversal of tree
+    /**
+     * Creates an array with the elements using in-order traversal of tree
+     * @return array 
+     */
     public Comparable[] toArray() {
 	Comparable[] arr = new Comparable[size];
 	Entry<T> node = root;
@@ -179,17 +211,23 @@ public class BinarySearchTree<T extends Comparable<? super T>> implements Iterab
 	    node = node.left;
 	    arr[i++] = node.element;
 	    node = node.right;
-	}
+	} 
 	return arr;
     }
 
+    /**
+     * Prints the tree
+     */
     public void printTree() {
 	System.out.print("[" + size + "]");
 	printTree(root);
 	System.out.println();
     }
 
-    // Inorder traversal of tree
+    /**
+     * Inorder traversal of tree
+     * @param node
+     */
     void printTree(Entry<T> node) {
 	if(node != null) {
 	    printTree(node.left);
@@ -198,15 +236,22 @@ public class BinarySearchTree<T extends Comparable<? super T>> implements Iterab
 	}
     }
 
-	@Override
-	public Iterator<T> iterator() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	/**
+	 * DRIVER CLASS / MAIN CLASS
+	 * @param args
+	 * SWITCH CASE:
+	 * 		case 1: ADD element
+	 *  	case 2: SEARCH element
+	 *   	case 3: MINIMUM element
+	 *    	case 4: MAXIMUM element
+	 *     	case 5: REMOVE element
+	 *      case 6: GET element
+	 *      case 7: ARRAY element 		
+	 */
 	 public static void main(String[] args) {
 			BinarySearchTree<Integer> t = new BinarySearchTree<>();
 		        Scanner in = new Scanner(System.in);
-		    	
+		    	System.out.println("PRESS:"+"\n1 for add \n2 for search\n3 for minimum\n4 for maximum\n5 for remove\n6 for get\n7 for array");
 			      while (in.hasNext()) {
 					int com = in.nextInt();
 					switch (com) {
@@ -251,44 +296,6 @@ public class BinarySearchTree<T extends Comparable<? super T>> implements Iterab
 		                }
 		                System.out.println();
 					}	
-			      }
-			      
-			      
-			      
-//		        while(in.hasNext()) {
-//		            int x = in.nextInt();
-//		            if(x > 0) {
-//		             
-//		            } 
-//		 //               else if(x < 0) {
-////		                System.out.print("Remove " + x + " : ");
-////		                t.remove(-x);
-////		                t.printTree();
-////		            } else {
-////		               
-////		                return;
-////		            }           
-//		        }
+			      }			    		    		     
 		    }
 }
-/*
-Sample input:
-1 3 5 7 9 2 4 6 8 10 -3 -6 -3 0
-
-Output:
-Add 1 : [1] 1
-Add 3 : [2] 1 3
-Add 5 : [3] 1 3 5
-Add 7 : [4] 1 3 5 7
-Add 9 : [5] 1 3 5 7 9
-Add 2 : [6] 1 2 3 5 7 9
-Add 4 : [7] 1 2 3 4 5 7 9
-Add 6 : [8] 1 2 3 4 5 6 7 9
-Add 8 : [9] 1 2 3 4 5 6 7 8 9
-Add 10 : [10] 1 2 3 4 5 6 7 8 9 10
-Remove -3 : [9] 1 2 4 5 6 7 8 9 10
-Remove -6 : [8] 1 2 4 5 7 8 9 10
-Remove -3 : [8] 1 2 4 5 7 8 9 10
-Final: 1 2 4 5 7 8 9 10 
-
-*/
