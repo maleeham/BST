@@ -1,4 +1,4 @@
-/** @author Bhavya Kashetty, bxb180012
+/** @author Bahavya Kashetty, bxb180012
  * 			Maleeha Shabeer Koul, msk180001
  *  Binary search tree implementation
  *  Date created: 09/27/2018
@@ -23,6 +23,8 @@ public class BinarySearchTree<T extends Comparable<? super T>> {
     
     Entry<T> root;
     int size;
+    Comparable[] inOrder;
+    int inOrderIndex = 0;
     
     /**
      * Constructor
@@ -171,7 +173,7 @@ public class BinarySearchTree<T extends Comparable<? super T>> {
     	}
     	while(true) {
     		if (x.compareTo(t.element) < 0) {
-    			if (t.left ==null)
+    			if (t.left == null)
     				break;
     			else {
     				s.push(t);
@@ -204,16 +206,28 @@ public class BinarySearchTree<T extends Comparable<? super T>> {
      * @return array 
      */
     public Comparable[] toArray() {
-	Comparable[] arr = new Comparable[size];
-	Entry<T> node = root;
-	int i = 0;
-	while(node != null) {
-	    node = node.left;
-	    arr[i++] = node.element;
-	    node = node.right;
-	} 
-	return arr;
-    }
+    this.inOrder = new Comparable[size];
+    storeInorder(root);
+
+	return this.inOrder;    
+   }
+
+
+    void storeInorder(Entry<T> node) 
+    { 
+        if (node == null) 
+            return; 
+  
+        /* first recur on left child */
+        storeInorder(node.left); 
+  
+        /* then store the data of node */
+        inOrder[inOrderIndex++] = node.element;
+  
+        /* now recur on right child */
+        storeInorder(node.right);
+
+    } 
 
     /**
      * Prints the tree
