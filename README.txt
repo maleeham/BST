@@ -2,7 +2,7 @@ README.txt file for BinarySearchTree.java
 Date Created: 09/27/2018
 
 @author: Koul Maleeha msk180001
-		     Kashetty Bhavya bxb180012
+		 Kashetty Bhavya bxb180012
 
 Purpose of the class:
 	Implementation of Binary Search Tree Data structure	
@@ -44,6 +44,7 @@ Running the file:
 					case 6: GET element
 					case 7: ARRAY element 
 			Select the desired operation using the correspong case number.
+		*For testing the functionality of all the functions, it is recommended to add some elements first to the Binary Search Tree using case 1 which is ADD.
 			
 		
 		
