@@ -2,7 +2,7 @@ README.txt file for BinarySearchTree.java
 Date Created: 09/27/2018
 
 @author: Koul Maleeha msk180001
-		 Kashetty Bhavya bxb180012
+		
 
 Purpose of the class:
 	Implementation of Binary Search Tree Data structure	
