@@ -1,4 +1,4 @@
-/** @author Bahavya Kashetty, bxb180012
+/** @author 
  * 			Maleeha Shabeer Koul, msk180001
  *  Binary search tree implementation
  *  Date created: 09/27/2018
